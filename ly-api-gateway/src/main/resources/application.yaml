@@ -1,0 +1,47 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: api-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5 #获取服务地址的时长，默认为30秒，设置为5秒
+zuul:
+  prefix: /api #添加路由前缀
+  routes:
+    item-service: /item/** #将商品微服务映射到路径api/item/**下
+    search-service: /search/** #将搜索微服务映射到路径api/search**下
+    user-service: /user/**
+    auth-service: /auth/**
+    cart-service: /cart/**
+    order-service: /order/**
+    upload-service:
+      path: /upload/**
+      service: upload-service #禁止忽略路由前缀，，没禁止之前需要http://api.leyou.com/api/upload/upload/image    在请求发起得时候，会忽略upload前缀
+      strip-prefix: false    #禁止之后：http://api.leyou.com/api/upload/image。即不忽略前缀
+  add-host-header: true  #允许携带请求本身的host头信息
+  sensitive-headers:   #Zuul内部有默认的过滤器，会对请求和响应头信息进行重组，过滤掉敏感的头信息：sensitive-headers:即存储了一些头信息，此处设置zuul中敏感的头信息为null，
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000 # 熔断超时时长：5000ms
+ribbon:
+  ConnectTimeout: 500 #设置连接超时时间
+  ReadTimeout: 4000 #设置读取超时间
+ly:
+  jwt:
+    pubKeyPath: D:/leyou/rsa/id_rsa.pub # 公钥地址
+    cookieName: LY_TOKEN
+  filter:   #过滤器校验白名单
+    allowPaths:
+      - /api/auth  #登录校验接口
+      - /api/search  #搜索接口
+      - /api/user/register  #注册接口
+      - /api/user/check     #数据校验接口
+      - /api/user/code   #发送验证码接口
+      - /api/item  #由于没有对后台实现登陆，所以暂时放行，生产条件一定拦截

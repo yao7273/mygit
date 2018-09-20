@@ -1,0 +1,19 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: page-serivce
+  thymeleaf:
+    cache: false  #Thymeleaf默认会开启页面缓存，提高页面并发能力。但会导致我们修改页面不会立即被展现，因此我们关闭缓存：关闭thymeleaf的自动缓存
+  rabbitmq:
+    host: 192.168.206.130
+    username: /leyou
+    password: leyou
+    virtual-host: /leyou
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+ly:
+  page:
+    destPath: D:/Soft/leyou/nginx-1.12.2/html/item

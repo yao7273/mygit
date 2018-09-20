@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+</head>
+<body>
+    <span th:text="${msg}"> 好不好</span>
+    <span th:text="${brand.name}">???</span>
+    <span th:text="${categories[0].name}">??</span>
+    <li th:each="c : ${categories}">
+        <a href="#" th:text="${c.name}">手机</a>
+    </li>
+    <li>
+        <a href="#" th:text="${brand.name}">Apple</a>
+    </li>
+    <li class="active" th:text="${spu.title}">Apple iPhone 6s</li>
+</body>
+</html>

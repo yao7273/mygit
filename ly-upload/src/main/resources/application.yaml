@@ -1,0 +1,29 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: upload-service
+  servlet:
+    multipart:
+      max-file-size: 5MB #限制文件上传大小
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+ly:
+  upload:
+    baseUrl: http://image.leyou.com/   #图片访问地址
+    localPath: D:/Soft/leyou/nginx-1.12.2/html  #传统文件上传的保存地址
+    allowFileTypes:  #允许的传输类型
+      - image/jpeg
+      - image/jpg
+      - image/png
+fdfs:
+  so-timeout: 2500
+  connect-timeout: 600
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址，使用FastDFS中的追踪路径，会返回给客户端一个可以存储文件的地址与端口号
+    - 192.168.206.130:22122

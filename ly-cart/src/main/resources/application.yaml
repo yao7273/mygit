@@ -1,0 +1,16 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: cart-service
+  redis:
+    host: 192.168.206.130
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+    registry-fetch-interval-seconds: 5
+ly:
+  jwt:
+    pubKeyPath: D:/leyou/rsa/id_rsa.pub # 公钥地址
+    cookieName: LY_TOKEN

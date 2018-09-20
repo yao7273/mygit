@@ -1,0 +1,20 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: search-service
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: 192.168.206.130:9300
+  jackson:
+    default-property-inclusion: non_null   # 默认属性的排除。排除null了属性，配置json处理时忽略空值
+  rabbitmq:  #消息的接收者
+    host: 192.168.206.130
+    username: /leyou
+    password: leyou
+    virtual-host: /leyou
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka

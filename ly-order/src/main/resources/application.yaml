@@ -1,0 +1,36 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/heima
+    username: root
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+  jackson:
+    default-property-inclusion: non_null  #json转换时默认忽略空值
+  redis:
+    host: 192.168.206.130
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+mybatis:
+  type-aliases-package: com.leyou.order.pojo
+ly:
+  jwt:
+    pubKeyPath: D:/leyou/rsa/id_rsa.pub # 公钥地址
+    cookieName: LY_TOKEN
+  worker:   #给每个部署的节点都配置机器id：雪花加密算法生成订单id时使用
+    workerId: 1
+    dataCenterId: 1
+  pay:   #微信支付需要的基本属性
+    appId: wx8397f8696b538317
+    mchId: 1473426802
+    key: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
+    httpConnectTimeoutMs: 5000
+    httpReadTimeoutMs: 10000
+    tradeType: NATIVE  #交易类型，扫码支付
+    spbillCreateIp: 127.0.0.1
+    notifyUrl: http://d796vq.natappfree.cc/wxpay/notify  #内网穿透配置地址，用于异步接收微信支付结果通知的回调地址。
