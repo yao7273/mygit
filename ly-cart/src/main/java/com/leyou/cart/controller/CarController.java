@@ -22,6 +22,8 @@ public class CarController {
     @PostMapping
     public ResponseEntity<Void> addCart(@RequestBody Cart cart){
         cartService.addCart(cart);
+
+        System.out.println("cart = " + cart);
         return ResponseEntity.ok().build();
     }
 
